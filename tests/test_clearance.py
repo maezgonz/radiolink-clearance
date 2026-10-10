@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 from radiolink import RadioLinkEngine, TowerOptimizer
-from radiolink.core import EARTH_RADIUS_KM, STANDARD_K_FACTOR
+from radiolink.core import STANDARD_K_FACTOR
 from radiolink.io import load_profile_from_csv
 
 
