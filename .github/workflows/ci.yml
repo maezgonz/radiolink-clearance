@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-test-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -e . "ruff==0.16.9" pytest
+      - name: Lint
+        run: ruff check .
+      - name: Unit tests
+        run: python -m pytest tests/ -q
+      - name: CLI smoke test
+        run: python -m radiolink.cli --file data/sample_profile.csv --freq 7.0 --h1 60 --h2 80 --k 1.0 --rf 0.6 --optimize

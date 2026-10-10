@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "radiolink-clearance"
+version = "1.0.0"
+description = "Microwave radiolink clearance and Fresnel zone analysis suite (ITU-R P.530 compliant)"
+readme = "README.md"
+authors = [{ name = "Matias Gonzalez" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "matplotlib>=3.8",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+gui = ["streamlit>=1.35"]
+test = ["pytest>=8.0"]
+
+[project.scripts]
+radiolink-cli = "radiolink.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint.isort]
+known-first-party = ["radiolink"]
