@@ -22,7 +22,9 @@ jobs:
       - name: CLI smoke test
         shell: bash
         run: |
+          set +e
           python -m radiolink.cli --file data/sample_profile.csv --freq 7.0 --h1 60 --h2 80 --k 1.0 --rf 0.6 --optimize
           rc=$?
+          set -e
           # The CLI returns 0 for compliant, 1 for obstructed (both are valid smoke outcomes)
-          [ "$rc" -eq 0 ] || [ "$rc" -eq 1 ]
+          if [ "$rc" -gt 1 ]; then exit "$rc"; fi
